@@ -46,10 +46,8 @@ export function FormState() {
         <button
           type="button"
           onClick={() => {
-            setValue("youDetails", {
-              firstName: "Bill",
-              lastName: "Cypher",
-            });
+            setValue("youDetails.firstName", "Bill");
+            setValue("youDetails.lastName", "Lee");
           }}
         >
           setValue
