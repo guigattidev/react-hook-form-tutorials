@@ -13,14 +13,20 @@ export function App() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty },
+    formState: { errors, isDirty, dirtyFields },
   } = useForm<FormInputs>({
-    defaultValues: {},
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+    },
   });
   renderCount++;
 
+  // Check if field was dirty, need provide default values
+  console.log("DirtyFields", dirtyFields);
+
   // Where of was form dirty
-  console.log("Dirty", isDirty);
+  console.log("IsDirty", isDirty);
 
   // Check for errors on fields
   console.log("Errors", errors);
