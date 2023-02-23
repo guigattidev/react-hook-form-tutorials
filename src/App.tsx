@@ -22,8 +22,10 @@ export function App() {
   renderCount++;
 
   // register, update values inside data
-  register("firstName", { required: true });
-  register("lastName", { maxLength: 5 });
+  register("firstName", {
+    required: { value: true, message: "This is required" },
+  });
+  register("lastName", { maxLength: { value: 5, message: "Max length is 5" } });
 
   return (
     <div>
