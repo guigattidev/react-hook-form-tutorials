@@ -15,7 +15,16 @@ export function App() {
   });
   renderCount++;
 
-  const [firstName, lastName] = watch(["firstName", "lastName"]);
+  // Subscribe to all application without rerender
+  React.useEffect(() => {
+    const subscription = watch((data) => {
+      console.log(data);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [watch]);
 
   return (
     <div>
