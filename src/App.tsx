@@ -3,53 +3,26 @@ import { useForm } from "react-hook-form";
 
 let renderCount = 0;
 
-interface FormValues {
-  firstName: string;
-  lastName: string;
-  age: number;
-}
-
 export function App() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      age: 0,
-    },
-  });
+  const [value, setValue] = React.useState("");
+
+  const { register, handleSubmit, watch } = useForm();
   renderCount++;
 
-  console.log("Errors", errors);
+  console.log(watch(["firstName", "lastName"]));
 
   return (
     <div>
+      <input value={value} onChange={(e) => setValue(e.target.value)} />
+
       <form
         onSubmit={handleSubmit((data) => {
           console.log(data);
         })}
       >
-        <input
-          {...register("firstName", {
-            required: { value: true, message: "This is required" },
-          })}
-          placeholder="First Name"
-        />
-
-        <input
-          {...register("lastName", {
-            maxLength: { value: 5, message: "Max length is 5" },
-            validate: async (value) => {
-              return value === "Bill";
-            },
-          })}
-          placeholder="Last Name"
-        />
-
-        <input {...register("age", { valueAsNumber: true })} type="number" />
+        <input {...register("firstName")} placeholder="First Name" />
+        <input {...register("lastName")} placeholder="Last Name" />
+        <input {...register("age")} placeholder="Age" />
 
         <input type="submit" />
       </form>
