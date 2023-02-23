@@ -6,10 +6,16 @@ let renderCount = 0;
 export function App() {
   const [value, setValue] = React.useState("");
 
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit, watch } = useForm({
+    defaultValues: {
+      firstName: "John",
+      lastName: "Snow",
+      age: "0",
+    },
+  });
   renderCount++;
 
-  console.log(watch("firstName", "Bill"));
+  const [firstName, lastName] = watch(["firstName", "lastName"]);
 
   return (
     <div>
