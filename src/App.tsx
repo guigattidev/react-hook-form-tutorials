@@ -9,7 +9,7 @@ export function App() {
   const { register, handleSubmit, watch } = useForm();
   renderCount++;
 
-  console.log(watch(["firstName", "lastName"]));
+  console.log(watch("firstName", "Bill"));
 
   return (
     <div>
