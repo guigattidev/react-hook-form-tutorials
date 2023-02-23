@@ -13,7 +13,7 @@ export function App() {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitSuccessful },
+    formState: { submitCount },
   } = useForm<FormInputs>({
     defaultValues: {
       firstName: "",
@@ -22,8 +22,11 @@ export function App() {
   });
   renderCount++;
 
+  // Check how many times submit was submitted
+  console.log("submitCount", submitCount);
+
   // Check if submited is successfully
-  console.log("isSubmitSuccessful", isSubmitSuccessful);
+  // console.log("isSubmitSuccessful", isSubmitSuccessful);
 
   // Indicates a input get focus and blur
   // console.log("touchedFields", touchedFields);
