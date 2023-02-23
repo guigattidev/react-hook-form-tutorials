@@ -9,7 +9,7 @@ interface FormValues {
   age: number;
 }
 
-export function App() {
+export function Register() {
   const {
     register,
     handleSubmit,
