@@ -10,7 +10,9 @@ function App() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: { firstName: "John", lastName: "Lee" },
+  });
 
   renderCount++;
 
