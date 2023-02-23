@@ -9,12 +9,19 @@ interface FormInputs {
 
 export function FormState() {
   // Boolean value that indicates whether form changes
-  const { register, setValue, handleSubmit } = useForm<FormInputs>({
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { isDirty, dirtyFields },
+  } = useForm<FormInputs>({
     defaultValues: {
       firstName: "",
     },
   });
   renderCount++;
+
+  console.log("isDirty, dirtyFields", isDirty, dirtyFields);
 
   return (
     <div>
@@ -31,7 +38,7 @@ export function FormState() {
         <button
           type="button"
           onClick={() => {
-            setValue("firstName", "bill");
+            setValue("firstName", "bill", { shouldDirty: true });
           }}
         >
           setValue
