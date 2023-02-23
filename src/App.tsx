@@ -24,11 +24,14 @@ function App() {
         })}
       >
         <input
-          {...register("firstName", { required: true })}
+          {...register("firstName", { required: "This is required." })}
           placeholder="First Name"
         />
         <input
-          {...register("lastName", { required: true, minLength: 4 })}
+          {...register("lastName", {
+            required: "This is required.",
+            minLength: { value: 4, message: "Min lenght is 4" },
+          })}
           placeholder="Last Name"
         />
         <input type="submit" />
