@@ -3,41 +3,39 @@ import { useForm } from "react-hook-form";
 
 let renderCount = 0;
 
-export function App() {
-  const [value, setValue] = React.useState("");
+interface FormInputs {
+  firstName: string;
+  lastName: string;
+}
 
-  const { register, handleSubmit, watch } = useForm({
-    defaultValues: {
-      firstName: "John",
-      lastName: "Snow",
-      age: "0",
-    },
+export function App() {
+  // Boolean value that indicates whether form changes
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>({
+    defaultValues: {},
   });
   renderCount++;
 
-  // Subscribe to all application without rerender
-  React.useEffect(() => {
-    const subscription = watch((data) => {
-      console.log(data);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [watch]);
+  console.log("Errors", errors);
 
   return (
     <div>
-      <input value={value} onChange={(e) => setValue(e.target.value)} />
-
       <form
         onSubmit={handleSubmit((data) => {
           console.log(data);
         })}
       >
-        <input {...register("firstName")} placeholder="First Name" />
-        <input {...register("lastName")} placeholder="Last Name" />
-        <input {...register("age")} placeholder="Age" />
+        <input
+          {...(register("firstName"), { required: true })}
+          placeholder="First Name"
+        />
+        <input
+          {...(register("lastName"), { required: true })}
+          placeholder="Last Name"
+        />
 
         <input type="submit" />
       </form>
