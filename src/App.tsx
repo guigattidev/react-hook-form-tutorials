@@ -13,12 +13,16 @@ export function App() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<FormInputs>({
     defaultValues: {},
   });
   renderCount++;
 
+  // Where of was form dirty
+  console.log("Dirty", isDirty);
+
+  // Check for errors on fields
   console.log("Errors", errors);
 
   return (
