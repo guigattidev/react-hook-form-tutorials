@@ -1,7 +1,5 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import { useForm } from "react-hook-form";
-import "./App.css";
 
 let renderCount = 0;
 
@@ -17,7 +15,8 @@ function App() {
 
   renderCount++;
 
-  console.log(watch());
+  const firstName = watch("firstName");
+  const lastName = watch("lastName");
 
   return (
     <div>
@@ -30,7 +29,9 @@ function App() {
           {...register("firstName", { required: "This is required." })}
           placeholder="First Name"
         />
+        <p>{firstName}</p>
         <p>{errors.firstName?.message}</p>
+
         <input
           {...register("lastName", {
             required: "This is required.",
@@ -38,6 +39,7 @@ function App() {
           })}
           placeholder="Last Name"
         />
+        <p>{lastName}</p>
         <p>{errors.lastName?.message}</p>
 
         <input type="submit" />
