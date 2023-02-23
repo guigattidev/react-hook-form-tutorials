@@ -1,22 +1,29 @@
-import { useState } from "react";
+import * as React from "react";
 import { useForm } from "react-hook-form";
 
 let renderCount = 0;
 
-function App() {
+interface FormValues {
+  firstName: string;
+  lastName: string;
+}
+
+export function App() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm({
-    defaultValues: { firstName: "John", lastName: "Lee" },
+  } = useForm<FormValues>({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+    },
   });
-
   renderCount++;
 
-  const firstName = watch("firstName");
-  const lastName = watch("lastName");
+  // register, update values inside data
+  register("firstName", { required: true });
+  register("lastName", { maxLength: 5 });
 
   return (
     <div>
@@ -25,27 +32,12 @@ function App() {
           console.log(data);
         })}
       >
-        <input
-          {...register("firstName", { required: "This is required." })}
-          placeholder="First Name"
-        />
-        <p>{firstName}</p>
-        <p>{errors.firstName?.message}</p>
+        <input name="firstName" placeholder="First Name" />
 
-        <input
-          {...register("lastName", {
-            required: "This is required.",
-            minLength: { value: 4, message: "Min lenght is 4" },
-          })}
-          placeholder="Last Name"
-        />
-        <p>{lastName}</p>
-        <p>{errors.lastName?.message}</p>
+        <input name="lastName" placeholder="Last Name" />
 
         <input type="submit" />
       </form>
     </div>
   );
 }
-
-export default App;
