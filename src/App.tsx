@@ -13,7 +13,7 @@ export function App() {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isValidating },
   } = useForm<FormInputs>({
     mode: "onChange",
     defaultValues: {
@@ -28,7 +28,10 @@ export function App() {
   };
 
   // Check if is valid on run time
-  console.log("isSubmitting", isSubmitting);
+  console.log("isValidating", isValidating);
+
+  // Check if is valid on run time
+  // console.log("isSubmitting", isSubmitting);
 
   // Check if is valid on run time
   // console.log("isvalid", isValid);
@@ -59,7 +62,13 @@ export function App() {
         })}
       >
         <input
-          {...(register("firstName"), { required: true })}
+          {...(register("firstName"),
+          {
+            validate: async () => {
+              await sleep(1000);
+              return true;
+            },
+          })}
           placeholder="First Name"
         />
         <input
