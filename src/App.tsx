@@ -13,7 +13,7 @@ export function App() {
   const {
     register,
     handleSubmit,
-    formState: { touchedFields },
+    formState: { isSubmitSuccessful },
   } = useForm<FormInputs>({
     defaultValues: {
       firstName: "",
@@ -22,8 +22,11 @@ export function App() {
   });
   renderCount++;
 
+  // Check if submited is successfully
+  console.log("isSubmitSuccessful", isSubmitSuccessful);
+
   // Indicates a input get focus and blur
-  console.log("touchedFields", touchedFields);
+  // console.log("touchedFields", touchedFields);
 
   // Check if field was dirty, need provide default values
   // console.log("DirtyFields", dirtyFields);
