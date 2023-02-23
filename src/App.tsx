@@ -6,9 +6,15 @@ import "./App.css";
 let renderCount = 0;
 
 function App() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   renderCount++;
+
+  console.log(errors);
 
   return (
     <div>
@@ -17,8 +23,14 @@ function App() {
           console.log(data);
         })}
       >
-        <input {...register("firstName")} placeholder="First Name" />
-        <input {...register("lastName")} placeholder="Last Name" />
+        <input
+          {...register("firstName", { required: true })}
+          placeholder="First Name"
+        />
+        <input
+          {...register("lastName", { required: true, minLength: 4 })}
+          placeholder="Last Name"
+        />
         <input type="submit" />
       </form>
     </div>
