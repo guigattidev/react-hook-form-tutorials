@@ -9,13 +9,7 @@ interface FormInputs {
 }
 
 export function App() {
-  // Boolean value that indicates whether form changes
-  const {
-    register,
-    handleSubmit,
-    formState,
-    formState: { errors },
-  } = useForm<FormInputs>({
+  const { register, handleSubmit, control, reset } = useForm<FormInputs>({
     mode: "onChange",
     defaultValues: {
       firstName: "",
@@ -24,57 +18,28 @@ export function App() {
   });
   renderCount++;
 
-  const onSubmit = async (data) => {
-    await sleep(3000);
-  };
-
-  // Check when formState was changed
-  React.useEffect(() => {
-    console.log("useEffect", formState.errors);
-  }, [formState]);
-
-  // Check if is valid on run time
-  // console.log("isValidating", isValidating);
-
-  // Check if is valid on run time
-  // console.log("isSubmitting", isSubmitting);
-
-  // Check if is valid on run time
-  // console.log("isvalid", isValid);
-
-  // Check how many times submit was submitted
-  // console.log("submitCount", submitCount);
-
-  // Check if submited is successfully
-  // console.log("isSubmitSuccessful", isSubmitSuccessful);
-
-  // Indicates a input get focus and blur
-  // console.log("touchedFields", touchedFields);
-
-  // Check if field was dirty, need provide default values
-  // console.log("DirtyFields", dirtyFields);
-
-  // Where of was form dirty
-  // console.log("IsDirty", isDirty);
-
-  // Check for errors on fields
-  // console.log("Errors", errors);
-
   return (
     <div>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          console.log("Submitted", data);
         })}
       >
         <input
           {...(register("firstName"), { required: true })}
           placeholder="First Name"
         />
-        <input
-          {...(register("lastName"), { required: true })}
-          placeholder="Last Name"
-        />
+
+        <input control={control} name={"lastName"} />
+
+        <button
+          type="button"
+          onClick={() => {
+            reset();
+          }}
+        >
+          Reset
+        </button>
 
         <input type="submit" />
       </form>
