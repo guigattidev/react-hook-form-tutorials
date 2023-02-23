@@ -11,17 +11,20 @@ export function FormState() {
   // Boolean value that indicates whether form changes
   const {
     register,
-    setValue,
     handleSubmit,
-    formState: { touchedFields },
+    setValue,
+    formState: { errors },
   } = useForm<FormInputs>({
     defaultValues: {
-      firstName: "",
+      yourDetails: {
+        firstName: "",
+        lastName: "",
+      },
     },
   });
   renderCount++;
 
-  console.log("touchedFields", touchedFields);
+  console.log("errors", errors);
 
   return (
     <div>
@@ -31,14 +34,22 @@ export function FormState() {
         })}
       >
         <input
-          {...(register("firstName"), { required: true })}
+          {...(register("youDetails.firstName"), { required: true })}
           placeholder="First Name"
+        />
+
+        <input
+          {...(register("youDetails.lastName"), { required: true })}
+          placeholder="Last Name"
         />
 
         <button
           type="button"
           onClick={() => {
-            setValue("firstName", "bill", { shouldTouch: true });
+            setValue("youDetails", {
+              firstName: "Bill",
+              lastName: "Cypher",
+            });
           }}
         >
           setValue
