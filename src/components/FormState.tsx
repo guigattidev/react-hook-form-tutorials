@@ -8,7 +8,7 @@ interface FormInputs {
   lastName: string;
 }
 
-export function App() {
+export function FormState() {
   // Boolean value that indicates whether form changes
   const {
     register,
