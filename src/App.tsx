@@ -13,7 +13,7 @@ export function App() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty, dirtyFields },
+    formState: { touchedFields },
   } = useForm<FormInputs>({
     defaultValues: {
       firstName: "",
@@ -22,14 +22,17 @@ export function App() {
   });
   renderCount++;
 
+  // Indicates a input get focus and blur
+  console.log("touchedFields", touchedFields);
+
   // Check if field was dirty, need provide default values
-  console.log("DirtyFields", dirtyFields);
+  // console.log("DirtyFields", dirtyFields);
 
   // Where of was form dirty
-  console.log("IsDirty", isDirty);
+  // console.log("IsDirty", isDirty);
 
   // Check for errors on fields
-  console.log("Errors", errors);
+  // console.log("Errors", errors);
 
   return (
     <div>
