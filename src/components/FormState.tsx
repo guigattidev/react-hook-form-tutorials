@@ -13,7 +13,7 @@ export function FormState() {
     register,
     setValue,
     handleSubmit,
-    formState: { isDirty, dirtyFields },
+    formState: { touchedFields },
   } = useForm<FormInputs>({
     defaultValues: {
       firstName: "",
@@ -21,7 +21,7 @@ export function FormState() {
   });
   renderCount++;
 
-  console.log("isDirty, dirtyFields", isDirty, dirtyFields);
+  console.log("touchedFields", touchedFields);
 
   return (
     <div>
@@ -38,7 +38,7 @@ export function FormState() {
         <button
           type="button"
           onClick={() => {
-            setValue("firstName", "bill", { shouldDirty: true });
+            setValue("firstName", "bill", { shouldTouch: true });
           }}
         >
           setValue
