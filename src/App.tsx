@@ -13,7 +13,7 @@ export function App() {
   const {
     register,
     handleSubmit,
-    formState: { isValid },
+    formState: { isSubmitting },
   } = useForm<FormInputs>({
     mode: "onChange",
     defaultValues: {
@@ -23,8 +23,15 @@ export function App() {
   });
   renderCount++;
 
+  const onSubmit = async (data) => {
+    await sleep(3000);
+  };
+
   // Check if is valid on run time
-  console.log("isvalid", isValid);
+  console.log("isSubmitting", isSubmitting);
+
+  // Check if is valid on run time
+  // console.log("isvalid", isValid);
 
   // Check how many times submit was submitted
   // console.log("submitCount", submitCount);
