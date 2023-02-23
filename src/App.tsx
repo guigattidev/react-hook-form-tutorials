@@ -35,7 +35,10 @@ export function App() {
         <button
           type="button"
           onClick={() => {
-            reset();
+            reset({
+              firstName: "Bill",
+              lastName: "Lee",
+            });
           }}
         >
           Reset
