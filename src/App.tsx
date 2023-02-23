@@ -25,7 +25,12 @@ export function App() {
   register("firstName", {
     required: { value: true, message: "This is required" },
   });
-  register("lastName", { maxLength: { value: 5, message: "Max length is 5" } });
+  register("lastName", {
+    maxLength: { value: 5, message: "Max length is 5" },
+    validate: async (value) => {
+      return value === "Bill";
+    },
+  });
 
   return (
     <div>
