@@ -9,6 +9,7 @@ function App() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: { firstName: "John", lastName: "Lee" },
@@ -16,7 +17,7 @@ function App() {
 
   renderCount++;
 
-  console.log(errors);
+  console.log(watch());
 
   return (
     <div>
@@ -29,6 +30,7 @@ function App() {
           {...register("firstName", { required: "This is required." })}
           placeholder="First Name"
         />
+        <p>{errors.firstName?.message}</p>
         <input
           {...register("lastName", {
             required: "This is required.",
@@ -36,6 +38,8 @@ function App() {
           })}
           placeholder="Last Name"
         />
+        <p>{errors.lastName?.message}</p>
+
         <input type="submit" />
       </form>
     </div>
