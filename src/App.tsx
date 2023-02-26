@@ -9,7 +9,13 @@ interface FormInputs {
 }
 
 export function App() {
-  const { register, handleSubmit, control, reset } = useForm<FormInputs>({
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { isDirty },
+  } = useForm<FormInputs>({
     mode: "onChange",
     defaultValues: {
       firstName: "",
@@ -17,6 +23,8 @@ export function App() {
     },
   });
   renderCount++;
+
+  console.log("isDirty", isDirty);
 
   return (
     <div>
@@ -30,15 +38,20 @@ export function App() {
           placeholder="First Name"
         />
 
-        <input control={control} name={"lastName"} />
+        <input name={"lastName"} />
 
         <button
           type="button"
           onClick={() => {
-            reset({
-              firstName: "Bill",
-              lastName: "Lee",
-            });
+            reset(
+              {
+                firstName: "Bill",
+                lastName: "Lee",
+              },
+              {
+                keepDefaultValues: true,
+              }
+            );
           }}
         >
           Reset
